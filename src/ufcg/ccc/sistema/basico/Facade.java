@@ -2,11 +2,12 @@ package ufcg.ccc.sistema.basico;
 
 public class Facade {
 	
-	Controler control;
+	Controller control;
 	
 	public Facade() {
 		
-		control = new Controler();
+		control = new Controller();
+		
 	}
 
 	public void inicializarSistema(int caixaSistema, double taxaSistema) {
@@ -57,5 +58,10 @@ public class Facade {
 	public void fecharAposta(int cenario, boolean ocorreu) {
 		
 		
+	}
+
+	public int cadastrarCenario(String descricao, int bônus) {
+		
+		return this.control.cadastrarCenario(descricao, bônus);
 	}
 }
