@@ -144,7 +144,64 @@ public class Sistema {
 	}
 	
 	/**
+	 * Método que cadastra um aposta assegurada por valor no sistema
+	 * 
+	 * @param cenario	Será usado para saber em qual cenário será cadastrado a aposta
+	 * @param apostador		Será usado para cadastrar o nome do apostador
+	 * @param valor		Será usado para cadastrar o valor da aposta
+	 * @param previsao		Será cadastrar a previsão da aposta
+	 * @param valorSeguro 	Será usado para guardar o seguro por valor
+	 * @param custo 	Será usado para guardar o custo do seguro
+	 * 
+	 * @return O numero do cenário onde a aposta foi cadastrada
+	 */
+	public int cadastrarApostaSeguraValor(int cenario, String apostador, int valor, String previsao, int valorSeguro, int custo) {
+		
+		if (cenario <= 0) {
+			
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		
+		}else if (cenario > this.cenarios.size()) {
+			
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+		}
+		
+		this.cenarios.get(cenario - 1).cadastrarAposta(apostador, valor, previsao, valorSeguro, custo);
+		return cenario;
+	}
+	
+	/**
+	 * Método que cadastra um aposta assegurada por taxa no sistema
+	 * 
+	 * @param cenario	Será usado para saber em qual cenário será cadastrado a aposta
+	 * @param apostador		Será usado para cadastrar o nome do apostador
+	 * @param valor		Será usado para cadastrar o valor da aposta
+	 * @param previsao		Será cadastrar a previsão da aposta
+	 * @param taxaSeguro 	Será usado para guardar o seguro por taxa
+	 * @param custo 	Será usado para guardar o custo do seguro
+	 * 
+	 * @return O numero do cenário onde a aposta foi cadastrada
+	 */
+	public int cadastrarApostaSeguraTaxa(int cenario, String apostador, int valor, String previsao, double taxaSeguro, int custo) {
+		
+		if (cenario <= 0) {
+			
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario invalido");
+		
+		}else if (cenario > this.cenarios.size()) {
+			
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Cenario nao cadastrado");
+		}
+		
+		this.cenarios.get(cenario - 1).cadastrarAposta(apostador, valor, previsao, taxaSeguro, custo);
+		return cenario;
+	}
+
+	
+	
+	/**
 	 * @param cenario	Será usado para saber o cenário desejado
+	 * 
 	 * @return		Retorna o valor total das apostas em um cenário específico 
 	 */
 	public int valorTotalDeApostas(int cenario) {

@@ -22,6 +22,8 @@ public class Aposta {
 	 */
 	private String previsao;
 	
+	private Seguro seguro;
+	
 	/**
 	 * Método construtor
 	 * 
@@ -51,6 +53,7 @@ public class Aposta {
 		this.apostador = apostador;
 		this.valorAposta = valor;
 		this.previsao = previsao;
+		this.seguro = new SemSeguro();
 	}
 	
 	/**

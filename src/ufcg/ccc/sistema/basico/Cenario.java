@@ -56,13 +56,13 @@ public class Cenario {
 	/**
 	 * Atributo que possui o valor destinado ao caixa quando o cenário é finalizado
 	 */
-	private int valorDestinadoAoCaixa;
+	protected int valorDestinadoAoCaixa;
 	
 	/**
 	 * Possui o valor que seŕa divido aos apostadores vencedores quando o cenário
 	 * é finalizado
 	 */
-	private int valorDividoEntreVencedores;
+	protected int valorDividoEntreVencedores;
 	
 	/**
 	 * Método construtor que inicializa alguns atributos e cadastra a descrição
@@ -119,6 +119,32 @@ public class Cenario {
 	}
 	
 	/**
+	 * Método que cadastra uma aposta no cenário
+	 * 
+	 * @param nomeApostador		Guarda o nome do apostador
+	 * @param valor			Carrega o valor em dinheiro da aposta
+	 * @param previsao		Carrega o palpite do apostador sobre o cenário
+	 */
+	public void cadastrarAposta(String nomeApostador, int valor, String previsao, int valorSeguro, int custo) {
+	
+		apostas.add(new ApostaAsseguradaValor(nomeApostador, valor, previsao, valorSeguro, custo));
+		valorTotalApostas += valor;
+	}
+	
+	/**
+	 * Método que cadastra uma aposta no cenário
+	 * 
+	 * @param nomeApostador		Guarda o nome do apostador
+	 * @param valor			Carrega o valor em dinheiro da aposta
+	 * @param previsao		Carrega o palpite do apostador sobre o cenário
+	 */
+	public void cadastrarAposta(String nomeApostador, int valor, String previsao, double taxaSeguro, int custo) {
+	
+		apostas.add(new ApostaAsseguradaTaxa(nomeApostador, valor, previsao, taxaSeguro, custo));
+		valorTotalApostas += valor;
+	}
+	
+	/**
 	 * @return	Retorna o valor total do dinheiro das apostas 
 	 */
 	public int getValorTotalApostas() {
@@ -126,7 +152,12 @@ public class Cenario {
 		return this.valorTotalApostas;
 	}
 	
-	/**
+	/**/**
+ * Classe filha de Aposta que apresenta alterações por guardar um seguro por valor quanto a aposta
+ * e isso alterará outros métodos da classe. 
+ * 
+ * @author danielbt
+ */
 	 * @return		Retorna o numero total de apostas feitas no cenário
 	 */
 	public int totalDeApostas() {
